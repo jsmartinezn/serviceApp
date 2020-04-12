@@ -5,7 +5,7 @@ const ObjectID = require("mongodb").ObjectID;
 
 /* GET home page. */
 router.get("/", function (req, res) {
-  res.render("home", { user: req.user });
+  res.render("front/html");
 });
 
 router.post(
