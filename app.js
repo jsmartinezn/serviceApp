@@ -12,7 +12,7 @@ const passportRouter = require("./routes/passportRoutes.js");
 const app = express();
 
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "front/build"));
 app.set("view engine", "ejs");
 
 app.use(logger("dev"));

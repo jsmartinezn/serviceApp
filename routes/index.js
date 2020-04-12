@@ -4,9 +4,6 @@ const mu = require("../db/MongoUtils.js");
 const ObjectID = require("mongodb").ObjectID;
 
 /* GET home page. */
-router.get("/", function (req, res) {
-  res.render("front/html");
-});
 
 router.post(
   "/registroPregunta",
