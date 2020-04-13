@@ -124,10 +124,20 @@ const App = () => {
                         </li>
                         <li className="nav-item menu-login">
                           {!user ? (
-                            <Link className="nav-link" to="/login">
-                              {" "}
-                              Iniciar Sesión{" "}
-                            </Link>
+                            <div className="row">
+                              <div className="col-7">
+                                <Link className="nav-link" to="/login">
+                                  {" "}
+                                  Iniciar Sesión
+                                </Link>
+                              </div>
+                              <div className="col-5">
+                                <Link className="nav-link" to="/register">
+                                  {" "}
+                                  Registrarse{" "}
+                                </Link>
+                              </div>
+                            </div>
                           ) : (
                             <div className="row">
                               <div className="col-4">
