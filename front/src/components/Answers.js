@@ -19,7 +19,7 @@ const Answers = (props) => {
       <form action={ruta} method="post">
         {renderAnswers()}
         {!props.usuario ? (
-          <div></div>
+          <div>Inicia sesión para responder</div>
         ) : (
           <div>
             <div>

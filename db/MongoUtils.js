@@ -8,8 +8,8 @@ function MongoUtils() {
     dbName = "foro";
 
   mu.connect = () => {
-    const urls = process.env.PASS;
-    //const urls = `mongodb://${server}:${puerto}`;
+    // const urls = process.env.PASS;
+    const urls = `mongodb://${hostname}:${port}`;
     const client = new MongoClient(urls, {
       useUnifiedTopology: true,
     });

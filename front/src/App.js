@@ -49,60 +49,127 @@ const App = () => {
       });
   };
 
+  const CrearPregunta = () => {
+    return (
+      <div>
+        <h2>Preguntar: </h2>
+        <FormCreateQuestions user={user} />
+      </div>
+    );
+  };
   return (
-    <div>
-      <div className="container">
-        <Router>
-          <div>
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                {!user ? (
-                  <div>
-                    <li>
-                      <Link to="/login">Login</Link>
-                    </li>
-                    <li>
-                      <Link to="/register">Register</Link>
-                    </li>
-                  </div>
-                ) : (
-                  <div>
-                    welcome {user.username}{" "}
-                    <button onClick={onLogout}>Logout</button>{" "}
-                  </div>
-                )}
-              </ul>
-            </nav>
-            {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-            <Switch>
-              <Route path="/login">
-                <Logi />
-              </Route>
-              <Route path="/register">
-                <Regi />
-              </Route>
-            </Switch>
-          </div>
-        </Router>
+    <div className="container-fluid">
+      <div className="container info">
+        <div className="row">
+          <div className="col-12">
+            <Router>
+              <nav
+                id="navbar"
+                className="navbar navbar-expand-lg navbar-dark bg-dark"
+              >
+                <a className="navbar-brand" href="/">
+                  PreguntAndes
+                </a>
+                <button
+                  className="navbar-toggler"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#navbarTogglerDemo02"
+                  aria-controls="navbarTogglerDemo02"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <span className="navbar-toggler-icon"></span>
+                </button>
+                <div
+                  className="collapse navbar-collapse"
+                  id="navbarTogglerDemo02"
+                >
+                  <div className="row menu-navbar">
+                    <div className="col-12">
+                      <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li className="nav-item">
+                          <Link className="nav-link" to="/">
+                            Home
+                          </Link>
+                        </li>
+                        <li className="nav-item" onClick={todasPreguntas}>
+                          <Link className="nav-link" to="/">
+                            Preguntas
+                          </Link>
+                        </li>
 
-        <div>
-          {user ? (
-            <div>
-              <button onClick={misPreguntas}>Mis preguntas</button>{" "}
-            </div>
-          ) : (
-            <span></span>
-          )}
-
-          <div>
-            <button onClick={todasPreguntas}>Todas las preguntas</button>{" "}
-          </div>
-          <div>
-            <Filter enviar={filter}></Filter>
+                        {!user ? (
+                          <span></span>
+                        ) : (
+                          <li className="nav-item" onClick={misPreguntas}>
+                            <Link className="nav-link" to="/">
+                              Mis preguntas
+                            </Link>
+                          </li>
+                        )}
+                        {!user ? (
+                          <span></span>
+                        ) : (
+                          <li className="nav-item">
+                            <Link className="nav-link" to="/crearPregunta">
+                              Preguntar
+                            </Link>
+                          </li>
+                        )}
+                        <li className="nav-item">
+                          <Link className="nav-link" to="/filtrar">
+                            Filtrar
+                          </Link>
+                        </li>
+                        <li className="nav-item menu-login">
+                          {!user ? (
+                            <Link className="nav-link" to="/login">
+                              {" "}
+                              Iniciar Sesión{" "}
+                            </Link>
+                          ) : (
+                            <div className="row">
+                              <div className="col-4">
+                                <Link className="nav-link" to="/">
+                                  {" "}
+                                  {user.username}{" "}
+                                </Link>
+                              </div>
+                              <div className="col-8">
+                                <Link
+                                  className="nav-link"
+                                  to="/"
+                                  onClick={onLogout}
+                                >
+                                  Cerrar sesion
+                                </Link>
+                              </div>
+                            </div>
+                          )}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+              <div className="contenido">
+                <Switch>
+                  <Route path="/login">
+                    <Logi />
+                  </Route>
+                  <Route path="/register">
+                    <Regi />
+                  </Route>
+                  <Route path="/crearPregunta">
+                    <CrearPregunta />
+                  </Route>
+                  <Route path="/filtrar">
+                    <Filter enviar={filter} />
+                  </Route>
+                </Switch>
+              </div>
+            </Router>
           </div>
         </div>
 
@@ -110,16 +177,6 @@ const App = () => {
           <div className="col-8">
             <Questions questions={questions} usuario={user}></Questions>
           </div>
-          {user ? (
-            <div className="col-4">
-              <h2>Crear una nueva pregunta</h2>
-              <FormCreateQuestions
-                username={user.username}
-              ></FormCreateQuestions>
-            </div>
-          ) : (
-            <span></span>
-          )}
         </div>
       </div>
       <Footer></Footer>
