@@ -2,13 +2,13 @@ const MongoClient = require("mongodb").MongoClient;
 
 function MongoUtils() {
   const mu = {},
-    hostname = "localhost",
-    port = 27017,
+    //  hostname = "localhost",
+    //port = 27017,
     dbName = "foro";
 
   mu.connect = () => {
-    //const urls = process.env.PASS;
-    const urls = `mongodb://${hostname}:${port}`;
+    const urls = process.env.PASS;
+    //const urls = `mongodb://${hostname}:${port}`;
     const client = new MongoClient(urls, {
       useUnifiedTopology: true,
     });
