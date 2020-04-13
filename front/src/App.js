@@ -44,9 +44,7 @@ const App = () => {
   const filter = (materia) => {
     fetch(`/getMateria/${materia}`)
       .then((res) => res.json())
-      .then((resp) => {
-        return setQuestions(resp);
-      });
+      .then((resp) => setQuestions(resp));
   };
 
   const CrearPregunta = () => {

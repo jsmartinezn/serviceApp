@@ -13,7 +13,9 @@ const Login = () => {
         <input type="password" name="password" required />
       </div>
       <div>
-        <input type="submit" value="Submit" />
+        <button type="submit" className="btn btn-primary">
+          Iniciar sesión
+        </button>
       </div>
     </form>
   );

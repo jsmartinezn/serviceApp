@@ -7,8 +7,7 @@ const Questions = (props) => {
     return props.questions.map((q, i) => (
       <div key={"question " + i}>
         <h2>{q.pregunta}</h2>
-        <div>Materia:{q.materia}</div>
-        <h3>Respuestas</h3>
+        <h5>Respuestas</h5>
         <Answer
           answers={q.respuestas}
           question={q.pregunta}

@@ -5,10 +5,6 @@ const CreateQuestions = (props) => {
   return (
     <form action="/registroPregunta" method="post">
       <div>
-        <div>Username: {props.username}</div>
-        <br />
-      </div>
-      <div>
         <label>Materia:</label>
         <input type="text" name="materia" />
       </div>
@@ -17,7 +13,9 @@ const CreateQuestions = (props) => {
         <input type="text" name="pregunta" />
       </div>
       <div>
-        <input type="submit" value="Submit" />
+        <button type="submit" className="btn btn-primary">
+          Preguntar
+        </button>
       </div>
     </form>
   );

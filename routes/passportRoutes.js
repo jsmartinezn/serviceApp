@@ -6,10 +6,6 @@ const bcrypt = require("bcrypt");
 
 // Define routes.
 
-router.get("/login", function (req, res) {
-  res.render("login");
-});
-
 router.post(
   "/login",
   passport.authenticate("local", { failureRedirect: "/login" }),
@@ -17,10 +13,6 @@ router.post(
     res.redirect("/");
   }
 );
-
-router.get("/register", function (req, res) {
-  res.render("register");
-});
 
 router.post("/register", (req, res) => {
   bcrypt.hash(req.body.password, 10, function (err, hash) {

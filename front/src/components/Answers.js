@@ -8,9 +8,12 @@ const Answers = (props) => {
         className="respuestas"
         key={"answer " + a.respuesta + props.question}
       >
-        <div>Username:{a.usuario}</div>
+        <div className="container">
+          <div>{a.usuario}</div>
 
-        <div>Respuesta: {a.respuesta}</div>
+          <div>Respuesta: {a.respuesta}</div>
+        </div>
+        <br />
       </div>
     ));
   const ruta = `/registroRespuesta/${props.id} `;
