@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "heroku-postbuild": "cd front && yarn install && yarn run build"
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
@@ -22,8 +23,7 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "react-navbar": "^3.0.0",
-    "react-router-dom": "^5.1.2",
-    "heroku-postbuild": "cd front && yarn install && yarn run build"
+    "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
     "bcrypt": "^4.0.1",
