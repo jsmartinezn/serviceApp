@@ -5,10 +5,12 @@ function MongoUtils() {
   const mu = {},
     hostname = "localhost",
     port = 27017,
-    dbName = "passport";
+    dbName = "foro";
 
   mu.connect = () => {
-    const client = new MongoClient(`mongodb://${hostname}:${port}`, {
+    const urls = process.env.PASS;
+    //const urls = `mongodb://${server}:${puerto}`;
+    const client = new MongoClient(urls, {
       useUnifiedTopology: true,
     });
     return client.connect();
