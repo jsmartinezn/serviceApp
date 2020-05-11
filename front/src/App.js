@@ -16,7 +16,7 @@ const App = () => {
   const [solicitud, setSolicitudes] = useState([]);
 
   const setUpWebSocket = () => {
-    const socket = new WebSocket("ws://localhost:3001");
+    const socket = new WebSocket("https://service-app-uniandes.herokuapp.com");
     socket.onopen = () => {
       console.log("WS socket connected");
 
