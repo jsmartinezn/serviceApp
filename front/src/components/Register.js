@@ -1,24 +1,49 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Empleados from "./RegEmpleado.js";
+import Clientes from "./RegCliente.js";
 
-const Login = () => {
+const Register = (props) => {
+  function Empleado() {
+    return (
+      <h2>
+        <Empleados email={props.email}></Empleados>
+      </h2>
+    );
+  }
+
+  function Cliente() {
+    return (
+      <h2>
+        <Clientes email={props.email}></Clientes>
+      </h2>
+    );
+  }
+
   return (
-    <form action="/register" method="post">
+    <Router>
       <div>
-        <label>Username:</label>
-        <input type="text" name="username" required />
-        <br />
+        <nav>
+          <ul>
+            <li>
+              <Link to="/empleado">Empleado</Link>
+            </li>
+            <li>
+              <Link to="/cliente">Cliente</Link>
+            </li>
+          </ul>
+        </nav>
+        <Switch>
+          <Route path="/empleado">
+            <Empleado />
+          </Route>
+          <Route path="/cliente">
+            <Cliente />
+          </Route>
+        </Switch>
       </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" name="password" required />
-      </div>
-      <div>
-        <button type="submit" className="btn btn-primary">
-          Registrarse
-        </button>
-      </div>
-    </form>
+    </Router>
   );
 };
 
-export default Login;
+export default Register;

@@ -1,45 +1,33 @@
 const express = require("express");
 const router = express.Router();
-const passport = require("passport");
+
 const mu = require("../db/MongoUtils.js");
-const bcrypt = require("bcrypt");
 
-// Define routes.
-
-router.post(
-  "/login",
-  passport.authenticate("local", { failureRedirect: "/login" }),
-  function (req, res) {
-    res.redirect("/");
-  }
-);
-
-router.post("/register", (req, res) => {
-  bcrypt.hash(req.body.password, 10, function (err, hash) {
-    mu.passport.register(req.body.username, hash);
-    res.redirect("/");
-  });
+router.get("/inicializar", function (req, res) {
+  mu.passport.inicializar().then(res.redirect("/"));
 });
 
-router.get("/logout", function (req, res) {
-  req.logout();
-  res.json({ ok: true });
+router.get("/getUser", function (req, res) {
+  mu.passport.getRecurrent().then((user) => res.json(user));
 });
 
-router.get(
-  "/profile",
-  require("connect-ensure-login").ensureLoggedIn(),
-  function (req, res) {
-    res.render("profile", { user: req.user });
-  }
-);
-
-router.get("/getUser", (req, res) => {
-  return res.json(req.user || null);
+router.get("/reiniciar", function (req, res) {
+  mu.passport.reiniciar();
+  mu.passport.reiniciarE();
+  mu.passport.reiniciarC().then(res.redirect("/"));
 });
 
-router.get("/getUsers", (req, res) => {
-  mu.passport.getAll().then((resp) => res.json(resp));
+router.get("/getAll", function (req, res) {
+  mu.passport.getAll().then((user) => res.json(user));
+});
+
+router.get("/login/:query", (req, res) => {
+  console.log(req.params.query);
+  mu.passport.recurrent(req.params.query).then(res.redirect("/"));
+});
+
+router.get("/logout", (req, res) => {
+  mu.passport.recurrent("").then(res.redirect("/"));
 });
 
 module.exports = router;

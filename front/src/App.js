@@ -1,60 +1,110 @@
 import React, { useState, useEffect } from "react";
 import Footer from "./footer.js";
-import Questions from "./components/Questions.js";
-import FormCreateQuestions from "./components/FormCreateQuestions.js";
-import Login from "./components/Login.js";
 import Register from "./components/Register.js";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Filter from "./components/Filter.js";
+import Servicio from "./components/Servicios.js";
+import { GoogleLogin, GoogleLogout } from "react-google-login";
+import Solicitudes from "./components/Solicitudes.js";
+
+const CLIENT_ID = "";
 
 const App = () => {
-  const [user, setUser] = useState(null);
-  const [questions, setQuestions] = useState([]);
+  const [user, setUser] = useState([]);
+  const [email, setEmail] = useState("");
+  const [servicios, setServicios] = useState([]);
+  const [solicitud, setSolicitudes] = useState([]);
 
   useEffect(() => {
     console.log("get user");
     fetch("/getUser")
       .then((res) => res.json())
-      .then((user) => setUser(user));
+      .then((user) => setEmail(user[0].email));
+    fetch("/profile")
+      .then((res) => res.json())
+      .then((user) => {
+        console.log("ayuda", user[0]);
+        if (user[0]) {
+          setUser({ username: user[0].username, tipo: user[0].tipo });
+          if (user[0].tipo === "Empleado") {
+            fetch(`/getServicios/${user[0].username}`)
+              .then((res) => res.json())
+              .then((quest) => setSolicitudes(quest));
+            console.log("no deberia entrar");
+          } else {
+            fetch(`/getServiciosC/${user[0].username}`)
+              .then((res) => res.json())
+              .then((quest) => {
+                console.log("quest!", quest);
+                setSolicitudes(quest);
+              });
+            console.log("deberia entrar");
+          }
+        } else setUser(null);
+      });
+
+    fetch("/getAllE")
+      .then((res) => res.json())
+      .then((quest) => setServicios(quest));
   }, []);
 
-  const todasPreguntas = () =>
-    fetch("/preguntas")
-      .then((res) => res.json())
-      .then((quest) => setQuestions(quest));
-
-  const misPreguntas = () =>
-    fetch("/getPreguntasUsuario")
-      .then((res) => res.json())
-      .then((resp) => setQuestions(resp));
-
-  const onLogout = () => {
-    fetch("/logout")
-      .then((res) => res.json())
-      .then((res) => {
-        setQuestions([]);
-        if (res.ok) {
-          setUser(null);
-        } else {
-          alert("errroooooorrr");
-        }
-      });
-  };
-
-  const filter = (materia) => {
-    fetch(`/getMateria/${materia}`)
-      .then((res) => res.json())
-      .then((resp) => setQuestions(resp));
-  };
-
-  const CrearPregunta = () => {
+  function Regi() {
     return (
       <div>
-        <h2>Preguntar: </h2>
-        <FormCreateQuestions user={user} />
+        <Register email={email}></Register>
+      </div>
+    );
+  }
+  const GoogleBtn = () => {
+    const login = (response) => {
+      console.log("que pasa", JSON.stringify(response.Qt.zu));
+      setEmail(JSON.stringify(response.Qt.zu));
+      fetch("/login/" + response.Qt.zu);
+    };
+
+    const logout = (response) => {
+      fetch("/logout");
+      setEmail("");
+      console.log("logout");
+    };
+    console.log("usuario", email);
+    return (
+      <div>
+        {email ? (
+          <GoogleLogout
+            clientId={CLIENT_ID}
+            buttonText="Logout"
+            onLogoutSuccess={logout}
+          ></GoogleLogout>
+        ) : (
+          <GoogleLogin
+            clientId={CLIENT_ID}
+            buttonText="Login"
+            onSuccess={login}
+            cookiePolicy={"single_host_origin"}
+            responseType="code,token"
+          />
+        )}
       </div>
     );
   };
+
+  const Servicios = () => {
+    console.log("ser", servicios);
+    return (
+      <div>
+        <Servicio servicios={servicios} usuario={user}></Servicio>
+      </div>
+    );
+  };
+
+  const Solicitud = () => {
+    return (
+      <div>
+        <Solicitudes solicitud={solicitud} usuario={user}></Solicitudes>
+      </div>
+    );
+  };
+
   return (
     <div className="container-fluid">
       <div className="container info">
@@ -91,29 +141,22 @@ const App = () => {
                             Home
                           </Link>
                         </li>
-                        <li className="nav-item" onClick={todasPreguntas}>
-                          <Link className="nav-link" to="/">
-                            Preguntas
+
+                        <li className="nav-item">
+                          <Link className="nav-link" to="/servicios">
+                            Servicios
                           </Link>
                         </li>
-
                         {!user ? (
                           <span></span>
+                        ) : user.tipo === "Empleado" ? (
+                          <Link className="nav-link" to="/solicitudes">
+                            Solicitudes
+                          </Link>
                         ) : (
-                          <li className="nav-item" onClick={misPreguntas}>
-                            <Link className="nav-link" to="/">
-                              Mis preguntas
-                            </Link>
-                          </li>
-                        )}
-                        {!user ? (
-                          <span></span>
-                        ) : (
-                          <li className="nav-item">
-                            <Link className="nav-link" to="/crearPregunta">
-                              Preguntar
-                            </Link>
-                          </li>
+                          <Link className="nav-link" to="/solicitudes">
+                            Solicitudes
+                          </Link>
                         )}
                         <li className="nav-item">
                           <Link className="nav-link" to="/filtrar">
@@ -121,37 +164,38 @@ const App = () => {
                           </Link>
                         </li>
                         <li className="nav-item menu-login">
-                          {!user ? (
+                          {!email ? (
                             <div className="row">
-                              <div className="col-7">
-                                <Link className="nav-link" to="/login">
-                                  {" "}
-                                  Iniciar Sesión
-                                </Link>
-                              </div>
-                              <div className="col-5">
+                              <GoogleBtn />
+                            </div>
+                          ) : !user ? (
+                            <div className="row">
+                              <div className="col-6">
                                 <Link className="nav-link" to="/register">
                                   {" "}
                                   Registrarse{" "}
                                 </Link>
                               </div>
+                              <div className="col-6">
+                                <GoogleBtn />
+                              </div>
                             </div>
                           ) : (
                             <div className="row">
-                              <div className="col-4">
+                              <div className="col-3">
                                 <Link className="nav-link" to="/">
-                                  {" "}
-                                  {user.username}{" "}
+                                  {user.username}
                                 </Link>
                               </div>
-                              <div className="col-8">
-                                <Link
-                                  className="nav-link"
-                                  to="/"
-                                  onClick={onLogout}
-                                >
-                                  Cerrar sesion
+                              <div className="col-4">
+                                <Link className="nav-link" to="/">
+                                  {user.tipo}
                                 </Link>
+                              </div>
+                              <div className="col-4">
+                                <div className="row">
+                                  <GoogleBtn />
+                                </div>
                               </div>
                             </div>
                           )}
@@ -161,29 +205,24 @@ const App = () => {
                   </div>
                 </div>
               </nav>
+
               <div className="contenido">
                 <Switch>
                   <Route path="/login">
-                    <Logi />
+                    <GoogleBtn />
                   </Route>
                   <Route path="/register">
                     <Regi />
                   </Route>
-                  <Route path="/crearPregunta">
-                    <CrearPregunta />
+                  <Route path="/servicios">
+                    <Servicios />
                   </Route>
-                  <Route path="/filtrar">
-                    <Filter enviar={filter} />
+                  <Route path="/solicitudes">
+                    <Solicitud />
                   </Route>
                 </Switch>
               </div>
             </Router>
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col-8">
-            <Questions questions={questions} usuario={user}></Questions>
           </div>
         </div>
       </div>
@@ -193,19 +232,3 @@ const App = () => {
 };
 
 export default App;
-
-function Logi() {
-  return (
-    <div>
-      <Login></Login>
-    </div>
-  );
-}
-
-function Regi() {
-  return (
-    <div>
-      <Register></Register>
-    </div>
-  );
-}
