@@ -6,8 +6,7 @@ import Servicio from "./components/Servicios.js";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import Solicitudes from "./components/Solicitudes.js";
 
-const CLIENT_ID =
-  "928735218431-42u8v29ikt7o8sd4ljdr3n429fd43jfe.apps.googleusercontent.com";
+const CLIENT_ID = process.env.CLIENT;
 
 const App = () => {
   const [user, setUser] = useState([]);
@@ -15,7 +14,20 @@ const App = () => {
   const [servicios, setServicios] = useState([]);
   const [solicitud, setSolicitudes] = useState([]);
 
+  const setUpWebSocket = () => {
+    const socket = new WebSocket("ws://localhost:3001");
+    socket.onopen = () => {
+      console.log("WS socket connected");
+
+      socket.onmessage = (msg) => {
+        console.log("Got message", JSON.parse(msg.data));
+        setServicios(JSON.parse(msg.data));
+      };
+    };
+  };
+
   useEffect(() => {
+    setUpWebSocket();
     console.log("get user");
     fetch("/getUser")
       .then((res) => res.json())
@@ -159,11 +171,7 @@ const App = () => {
                             Solicitudes
                           </Link>
                         )}
-                        <li className="nav-item">
-                          <Link className="nav-link" to="/filtrar">
-                            Filtrar
-                          </Link>
-                        </li>
+
                         <li className="nav-item menu-login">
                           {!email ? (
                             <div className="row">
