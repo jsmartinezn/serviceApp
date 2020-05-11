@@ -1,0 +1,42 @@
+{
+  "name": "express-passport",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "heroku-postbuild": "cd front && yarn install && yarn run build",
+    "test": "jest"
+  },
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "babel-jest": "^24.9.0",
+    "body-parser": "^1.19.0",
+    "connect-ensure-login": "^0.1.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "express-session": "^1.17.0",
+    "http-errors": "^1.7.3",
+    "mdbreact": "^4.25.5",
+    "mongodb": "^3.5.5",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.2",
+    "passport": "^0.4.1",
+    "passport-google-oauth": "^2.0.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "react-navbar": "^3.0.0",
+    "react-router-dom": "^5.1.2",
+    "ws": "^7.3.0"
+  },
+  "devDependencies": {
+    "@shelf/jest-mongodb": "^1.1.5",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-react": "^7.19.0",
+    "jest": "^26.0.1",
+    "prettier": "^2.0.4"
+  }
+}
