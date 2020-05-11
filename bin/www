@@ -7,8 +7,6 @@
 const app = require('../app');
 const debug = require('debug')('express-passport:server');
 const http = require('http');
-const mu = require("../db/MongoUtils.js");
-const wsu = require("../db/WebSocketUtils.js");
 
 /**
  * Get port from environment and store in Express.
@@ -30,8 +28,7 @@ const server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-wsu.setWebSocket(server);
-mu.passport.listenForChanges(wsu.notifyAll);
+
 /**
  * Normalize a port into a number, string, or false.
  */
