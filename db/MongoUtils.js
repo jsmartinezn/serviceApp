@@ -8,7 +8,9 @@ function MongoUtils() {
 
   mu.connect = () => {
     // const urls = process.env.PASS;
-    const urls = process.env.PASS || `mongodb://${hostname}:${port}`;
+    const urls =
+      "mongodb+srv://sebas:sebas@robos-slq5d.mongodb.net/test?retryWrites=true&w=majority" ||
+      `mongodb://${hostname}:${port}`;
     const client = new MongoClient(urls, {
       useUnifiedTopology: true,
     });
