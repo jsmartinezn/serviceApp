@@ -3,19 +3,12 @@ import SolicitarServicio from "./SolicitarServicio.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const Servicios = (props) => {
-  const [servicio, setServicio] = useState([""]);
+  const [servicio, setServicio] = useState([]);
+  const [seleccion, setSeleccion] = useState(false);
 
   function Solicitar(user) {
-    console.log("usuario", user);
+    setSeleccion(true);
     setServicio(user);
-    return (
-      <div>
-        <SolicitarServicio
-          user={user}
-          usuarioC={props.usuario}
-        ></SolicitarServicio>
-      </div>
-    );
   }
 
   const renderServicios = () => {
@@ -30,7 +23,11 @@ const Servicios = (props) => {
               {!props.usuario ? (
                 <span></span>
               ) : (
-                <button to="/solicitar" onClick={(e) => Solicitar(s.username)}>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  onClick={(e) => Solicitar(s.username)}
+                >
                   Solicitar
                 </button>
               )}
@@ -45,7 +42,7 @@ const Servicios = (props) => {
             </Switch>
           </div>
         </Router>
-        {!servicio ? (
+        {!seleccion ? (
           <span></span>
         ) : (
           <div>

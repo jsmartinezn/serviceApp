@@ -1,7 +1,6 @@
 import React from "react";
 
 const AceptarServicio = (props) => {
-  console.log("this.props", props);
   return (
     <form action="/aceptarServicio" method="post">
       <div>
