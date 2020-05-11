@@ -233,6 +233,19 @@ function MongoUtils() {
         .finally(() => client.close());
     });
 
+  mu.passport.listenForChanges = (notifyAll) => {
+    console.log("Listening for changes");
+    return mu.connect().then((client) => {
+      const cursor = client.db(dbName).collection("empleado").watch();
+      cursor.on("change", (data) => {
+        console.log("Mongon change", data);
+        mu.passport.getAllE().then((docs) => {
+          notifyAll(JSON.stringify(docs));
+        });
+      });
+    });
+  };
+
   return mu;
 }
 

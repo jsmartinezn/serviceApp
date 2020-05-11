@@ -28,11 +28,6 @@ const Solicitudes = (props) => {
     setFin(true);
     setCal(false);
     setId(id);
-    return (
-      <div>
-        <Finalizar id={id}></Finalizar>
-      </div>
-    );
   }
 
   function Ca(id) {
@@ -40,11 +35,6 @@ const Solicitudes = (props) => {
     setFin(false);
     setCal(true);
     setId(id);
-    return (
-      <div>
-        <Calificar id={id}></Calificar>
-      </div>
-    );
   }
 
   const renderSolicitudes = () => {
@@ -56,7 +46,8 @@ const Solicitudes = (props) => {
               <h4>Empleado: {s.empleado}</h4>
               <h4>Cliente: {s.cliente}</h4>
               <h4>Estado: {s.estado}</h4>
-              {props.usuario.tipo === "Empleado" ? (
+              {props.usuario.tipo === "Empleado" &&
+              s.estado === "solicitado" ? (
                 <button
                   type="submit"
                   className="btn btn-primary"
@@ -76,7 +67,7 @@ const Solicitudes = (props) => {
                 >
                   Calificar
                 </button>
-              ) : (
+              ) : s.estado === "aceptada" ? (
                 <button
                   type="submit"
                   className="btn btn-primary"
@@ -84,6 +75,8 @@ const Solicitudes = (props) => {
                 >
                   finalizar
                 </button>
+              ) : (
+                <span></span>
               )}
             </div>
           ))}

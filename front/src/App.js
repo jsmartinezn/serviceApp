@@ -15,7 +15,20 @@ const App = () => {
   const [servicios, setServicios] = useState([]);
   const [solicitud, setSolicitudes] = useState([]);
 
+  const setUpWebSocket = () => {
+    const socket = new WebSocket("ws://localhost:3001");
+    socket.onopen = () => {
+      console.log("WS socket connected");
+
+      socket.onmessage = (msg) => {
+        console.log("Got message", JSON.parse(msg.data));
+        setServicios(JSON.parse(msg.data));
+      };
+    };
+  };
+
   useEffect(() => {
+    setUpWebSocket();
     console.log("get user");
     fetch("/getUser")
       .then((res) => res.json())
