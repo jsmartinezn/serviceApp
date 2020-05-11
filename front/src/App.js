@@ -6,7 +6,7 @@ import Servicio from "./components/Servicios.js";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import Solicitudes from "./components/Solicitudes.js";
 
-const CLIENT_ID = "";
+const CLIENT_ID = process.env.CLIENT_ID;
 
 const App = () => {
   const [user, setUser] = useState([]);
