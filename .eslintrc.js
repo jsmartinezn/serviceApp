@@ -1,10 +1,11 @@
 module.exports = {
+    plugins: ["jest"],
     env: {
         browser: true,
         es6: true,
         node: true,
     },
-    extends: ["eslint:recommended", "plugin:react/recommended", "prettier"],
+    extends: ["eslint:recommended", "plugin:react/recommended", "prettier", "plugin:jest/recommended"],
     globals: {
         Atomics: "readonly",
         SharedArrayBuffer: "readonly",
@@ -17,5 +18,9 @@ module.exports = {
         sourceType: "module",
     },
     plugins: ["react"],
-    rules: {},
+    rules: {
+    indent: ["error", 4],
+    "linebreak-style": ["error", "unix"],
+    quotes: ["error", "double"],
+    semi: ["error", "always"],},
 };
