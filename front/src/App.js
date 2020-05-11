@@ -6,9 +6,8 @@ import Servicio from "./components/Servicios.js";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import Solicitudes from "./components/Solicitudes.js";
 
-const CLIENT_ID = process.env.CLIENT;
-
-
+const CLIENT_ID =
+  "928735218431-42u8v29ikt7o8sd4ljdr3n429fd43jfe.apps.googleusercontent.com";
 
 const App = () => {
   const [user, setUser] = useState([]);
@@ -103,8 +102,8 @@ const App = () => {
               </div>
               <div className="col-12">
                 <p>
-                  Service-App es una herramienta que te permite conectarte con otras
-                  personas que ofrecen sus servicios en diferentes áreas.
+                  Service-App es una herramienta que te permite conectarte con
+                  otras personas que ofrecen sus servicios en diferentes áreas.
                 </p>
               </div>
             </div>
@@ -116,8 +115,8 @@ const App = () => {
               </div>
               <div className="col-12">
                 <p>
-                  Puedes iniciar sesión y solicitar servicios a personas
-                  que han ofrecido sus capacidades para hacerlos.
+                  Puedes iniciar sesión y solicitar servicios a personas que han
+                  ofrecido sus capacidades para hacerlos.
                 </p>
               </div>
             </div>
@@ -129,7 +128,8 @@ const App = () => {
               </div>
               <div className="col-12">
                 <p>
-                  Puedes soliciar un servicio, aceptarlo, finalizarlo y calificarlo.
+                  Puedes soliciar un servicio, aceptarlo, finalizarlo y
+                  calificarlo.
                 </p>
               </div>
             </div>
