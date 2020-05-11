@@ -6,7 +6,7 @@ const Footer = () => (
       <div className="footer row">
         <div className="blanco extra col-12 col-lg-5 offset-lg-1">
           <p>
-            Hecho con amor y bajo mucha presión, by Luis y Sebastián en Febrero
+            Hecho con amor y bajo mucha presión, by Luis y Sebastián en Mayo
             de 2020.
           </p>
         </div>

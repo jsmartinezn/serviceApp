@@ -10,6 +10,12 @@ h5,
 h6,
 a {
   color: #391361;
+  font-family: 'Rubik', sans-serif;
+}
+
+p, span, label {
+
+  font-family: 'Nunito Sans', sans-serif;
 }
 
 #navbar {
@@ -156,7 +162,7 @@ textarea {
 .input-group-prepend,
 .input-group-text,
 .form-group {
-  width: 100%;
+  width: 60%;
 }
 
 .labelAnswer {
@@ -189,12 +195,83 @@ textarea {
   background-color: #18612f;
   border-color: #18612f;
 }
-
+.btn-card{
+  width: 100%;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  position: absolute;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
 .btn-secondary,
 .btn-danger {
   border-radius: 10px;
 }
 
+.btn-gold{
+  background-color: #ad8345;
+  border-color: #ad8345;
+  color:#ffffff;
+}
 .gold {
   color: #ad8345;
+}
+
+.servicio, .solicitud{
+  margin-bottom: 2.5em;
+  text-align: center;
+  min-height: 12em;
+}
+
+.informacion{
+  margin-bottom: 2.5em;
+  text-align: justify;
+}
+
+.solicitar_servicio{
+  max-width: 50%
+}
+
+.fit{
+  position: relative;
+  min-height: 10em;
+  padding: 1em;
+  background-color: #e2e4e6;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.fit-2{
+  min-height: 15em;
+}
+
+.fit-3{
+  min-height: 20em;
+}
+
+.Icon {
+  font-size: 4rem;
+  text-align: center;
+  color: #391361;
+}
+.Home {
+  margin-top: 10vh;
+}
+.Home-box {
+  height: 45vh;
+  margin-bottom: 10vh;
+  padding: 1rem;
+  padding-top: 8vh;
+  padding-bottom: 8vh;
+  background-color: #e2e4e6;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.Home-box {
+  text-align: center;
 }

@@ -3,7 +3,7 @@ describe("insert", () => {
   let connection;
   let db;
   beforeAll(async () => {
-    connection = await MongoClient.connect(process.env.PASS, {
+    connection = await MongoClient.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
     });
     db = await connection.db("service");

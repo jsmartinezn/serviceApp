@@ -33,45 +33,52 @@ const Solicitudes = (props) => {
 
   const renderSolicitudes = () => {
     return (
-      <div>
+      <div className="solicitudes row">
+        <div className="col-12 informacion">
+          <h2>Solicitudes:</h2>
+          <p>A continuación encontrarás la lista de solicictudes que tienes actualmente. Puedes aceptar una solicitud de servicio nueva, finalizar una solicitud
+          que se encuentre en proceso, y calificar aquellas que ya se encuentrar finalizadas. </p>
+        </div>
         <Router>
           {props.solicitud.map((s, i) => (
-            <div key={"question " + i}>
-              <h4>Empleado: {s.empleado}</h4>
-              <h4>Cliente: {s.cliente}</h4>
-              <h4>Estado: {s.estado}</h4>
-              {props.usuario.tipo === "Empleado" &&
-              s.estado === "solicitado" ? (
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  onClick={(e) => Aceptar(s._id)}
-                >
-                  Aceptar servicio
-                </button>
-              ) : (
-                <span></span>
-              )}
+            <div className="solicitud col-4" key={"question " + i}>
+              <div className="fit">
+                <h4>Estado: {s.estado}</h4>
+                <h5>Empleado: {s.empleado}</h5>
+                <h5>Cliente: {s.cliente}</h5>
+                {props.usuario.tipo === "Empleado" &&
+                s.estado === "solicitado" ? (
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-card"
+                    onClick={(e) => Aceptar(s._id)}
+                  >
+                    Aceptar Servicio
+                  </button>
+                ) : (
+                  <span></span>
+                )}
 
-              {s.estado === "finalizada" ? (
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  onClick={(e) => Ca(s._id)}
-                >
-                  Calificar
-                </button>
-              ) : s.estado === "aceptada" ? (
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  onClick={(e) => Finalizarr(s._id)}
-                >
-                  finalizar
-                </button>
-              ) : (
-                <span></span>
-              )}
+                {s.estado === "finalizada" ? (
+                  <button
+                    type="submit"
+                    className="btn btn-gold btn-card"
+                    onClick={(e) => Ca(s._id)}
+                  >
+                    Calificar
+                  </button>
+                ) : s.estado === "aceptada" ? (
+                  <button
+                    type="submit"
+                    className="btn btn-danger btn-card"
+                    onClick={(e) => Finalizarr(s._id)}
+                  >
+                    Finalizar
+                  </button>
+                ) : (
+                  <span></span>
+                )}
+              </div>
             </div>
           ))}
 
@@ -94,18 +101,22 @@ const Solicitudes = (props) => {
             !cal ? (
               <span></span>
             ) : (
-              <div>
-                <Calificar id={id}></Calificar>
+              <div className="solicitar_servicio col-12">
+                <div className="fit fit-2">
+                  <Calificar id={id}></Calificar>
+                </div>
               </div>
             )
           ) : (
-            <div>
-              <Finalizar id={id}></Finalizar>
+            <div className="solicitar_servicio col-12">
+              <div className="fit fit-2">
+                <Finalizar id={id}></Finalizar>
+              </div>
             </div>
           )
         ) : (
-          <div>
-            <div>
+          <div className="solicitar_servicio col-12">
+            <div className="fit fit-2">
               <AceptarServicio id={id}></AceptarServicio>
             </div>
           </div>

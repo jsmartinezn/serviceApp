@@ -3,24 +3,26 @@ import React from "react";
 const SolicitarServicio = (props) => {
   return (
     <form action="/registroServicio" method="post">
-      <div>
+      <div className="form-group">
         <label>Usuario del empleado:</label>
-        <input type="text" name="usernameE" defaultValue={props.user} />
+        <input  readonly="true" className="form-control" type="text" name="usernameE" defaultValue={props.user}/>
       </div>
-      <div>
+      <div className="form-group">
         <label>Usuario del cliente:</label>
         <input
+          readonly="true"
+          className="form-control"
           type="text"
           name="usernameC"
           defaultValue={props.usuarioC.username}
         />
       </div>
-      <div>
+      <div className="form-group">
         <label>Especificaciones:</label>
-        <input type="text" name="especificacion" />
+        <input type="text"  className="form-control" name="especificacion"/>
       </div>
-      <div>
-        <button type="submit" className="btn btn-primary">
+      <div className="form-group">
+        <button type="submit" className="btn btn-primary btn-card">
           Solicitar
         </button>
       </div>

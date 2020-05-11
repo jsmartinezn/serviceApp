@@ -13,24 +13,35 @@ const Servicios = (props) => {
 
   const renderServicios = () => {
     return (
-      <div>
+      <div className="servicios row">
+        <div className="informacion col-12">
+          <h2> Servicios: </h2>
+          <p> A continuación se presenta una lista de servicios disponibles. Para solicitar un servicio basta con dar click en el botón solicitar y llenar la información adicional que se encuentra al final de la página. </p>
+        </div>
         <Router>
           {props.servicios.map((s, i) => (
-            <div key={"question " + i}>
-              <h2>
-                {s.username}: {s.ocupacion}
-              </h2>
-              {!props.usuario ? (
-                <span></span>
-              ) : (
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  onClick={(e) => Solicitar(s.username)}
-                >
-                  Solicitar
-                </button>
-              )}
+            <div className="servicio col-4"key={"question " + i}>
+              <div className="fit">
+                <div>
+                  <h5>
+                    Usuario: {s.username}
+                  </h5>
+                  <h6>
+                    Ocupación: {s.ocupacion}
+                  </h6>
+                </div>
+                {!props.usuario ? (
+                  <span></span>
+                ) : (
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-card"
+                    onClick={(e) => Solicitar(s.username)}
+                  >
+                    Solicitar
+                  </button>
+                )}
+              </div>
             </div>
           ))}
 
@@ -45,11 +56,13 @@ const Servicios = (props) => {
         {!seleccion ? (
           <span></span>
         ) : (
-          <div>
-            <SolicitarServicio
-              user={servicio}
-              usuarioC={props.usuario}
-            ></SolicitarServicio>
+          <div className="solicitar_servicio col-12">
+            <div className="fit fit-3">
+              <SolicitarServicio
+                user={servicio}
+                usuarioC={props.usuario}
+              ></SolicitarServicio>
+            </div>
           </div>
         )}
       </div>

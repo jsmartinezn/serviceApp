@@ -8,6 +8,8 @@ import Solicitudes from "./components/Solicitudes.js";
 
 const CLIENT_ID = process.env.CLIENT;
 
+
+
 const App = () => {
   const [user, setUser] = useState([]);
   const [email, setEmail] = useState("");
@@ -89,7 +91,53 @@ const App = () => {
       </div>
     );
   };
-
+  function Home() {
+    return (
+      <div className="">
+        <h2>Bienvenidos a Service-App</h2>
+        <div className="row">
+          <div className="col-12 col-lg-4 Home">
+            <div className="Home-box">
+              <div className="col-12 Icon">
+                <i className="fa fa-question-circle"></i>
+              </div>
+              <div className="col-12">
+                <p>
+                  Service-App es una herramienta que te permite conectarte con otras
+                  personas que ofrecen sus servicios en diferentes áreas.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="col-12 col-lg-4 Home">
+            <div className="Home-box">
+              <div className="col-12 Icon">
+                <i className="fa fa-search"></i>
+              </div>
+              <div className="col-12">
+                <p>
+                  Puedes iniciar sesión y solicitar servicios a personas
+                  que han ofrecido sus capacidades para hacerlos.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="col-12 col-lg-4 Home">
+            <div className="Home-box">
+              <div className="col-12 Icon">
+                <i className="fa fa-users"></i>
+              </div>
+              <div className="col-12">
+                <p>
+                  Puedes soliciar un servicio, aceptarlo, finalizarlo y calificarlo.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
   const Servicios = () => {
     return (
       <div>
@@ -117,7 +165,7 @@ const App = () => {
                 className="navbar navbar-expand-lg navbar-dark bg-dark"
               >
                 <a className="navbar-brand" href="/">
-                  PreguntAndes
+                  Service-App
                 </a>
                 <button
                   className="navbar-toggler"
@@ -216,6 +264,9 @@ const App = () => {
                   </Route>
                   <Route path="/solicitudes">
                     <Solicitud />
+                  </Route>
+                  <Route path="/">
+                    <Home />
                   </Route>
                 </Switch>
               </div>
