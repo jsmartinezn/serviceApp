@@ -1,7 +1,6 @@
 import React from "react";
 
 const SolicitarServicio = (props) => {
-  console.log("suarioC", props.usuarioC);
   return (
     <form action="/registroServicio" method="post">
       <div>

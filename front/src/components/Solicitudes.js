@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import AceptarServicio from "./AceptarServicio.js";
 import Finalizar from "./Finalizar.js";
 import Calificar from "./Calificar.js";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const Solicitudes = (props) => {
   const [id, setId] = useState([]);

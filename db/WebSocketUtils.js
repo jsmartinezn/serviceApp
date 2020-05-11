@@ -2,7 +2,7 @@ const WebSocket = require("ws");
 
 function WebSocketUtils() {
   const wsu = {};
-  var clients = [];
+  let clients = [];
 
   wsu.setWebSocket = (server) => {
     console.log("Setting up WebSocket");

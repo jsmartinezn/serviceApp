@@ -3,10 +3,10 @@ describe("insert", () => {
   let connection;
   let db;
   beforeAll(async () => {
-    connection = await MongoClient.connect(process.env.MONGO_URL, {
+    connection = await MongoClient.connect(process.env.PASS, {
       useNewUrlParser: true,
     });
-    db = await connection.db(process.env.DB_NAME);
+    db = await connection.db("service");
   });
 
   afterAll(async () => {
@@ -17,7 +17,12 @@ describe("insert", () => {
   it("insertar documento en coleccion usuario", async () => {
     const test = db.collection("usuario");
 
-    const mock = { _id: "some-id", username: "luis" , email:"prueba@prueba.com", tipo:"empleado"};
+    const mock = {
+      _id: "some-id",
+      username: "luis",
+      email: "prueba@prueba.com",
+      tipo: "empleado",
+    };
     await test.insertOne(mock);
 
     const insertedMoc = await test.findOne({ _id: "some-id" });
@@ -37,7 +42,12 @@ describe("insert", () => {
   it("insertar documento en coleccion empleado", async () => {
     const test = db.collection("empleado");
 
-    const mock = { _id: "some-id", username: "luis", ocupacion:"Ingeniero de software", anios:"4"};
+    const mock = {
+      _id: "some-id",
+      username: "luis",
+      ocupacion: "Ingeniero de software",
+      anios: "4",
+    };
     await test.insertOne(mock);
 
     const insertedMoc = await test.findOne({ _id: "some-id" });
@@ -52,17 +62,28 @@ describe("insert", () => {
     await cliente.insertOne(mock);
 
     const empleado = db.collection("empleado");
-    const mock2 = { _id: "some-id-2", username: "luis 2", ocupacion:"Ingeniero de software", anios:"4"};
+    const mock2 = {
+      _id: "some-id-2",
+      username: "luis 2",
+      ocupacion: "Ingeniero de software",
+      anios: "4",
+    };
     await empleado.insertOne(mock2);
 
     const insertedCliente = await cliente.findOne({ _id: "some-id-2" });
     const insertedEmpleado = await empleado.findOne({ _id: "some-id-2" });
 
-    const mock3 = { _id: "some-id", cliente: insertedCliente.username, empleado: insertedEmpleado.username, descripcion:"", estado:"", comentario:"" };
+    const mock3 = {
+      _id: "some-id",
+      cliente: insertedCliente.username,
+      empleado: insertedEmpleado.username,
+      descripcion: "",
+      estado: "",
+      comentario: "",
+    };
     await test.insertOne(mock3);
 
     const insertedMoc = await test.findOne({ _id: "some-id" });
     expect(insertedMoc).toEqual(mock3);
   });
-
 });

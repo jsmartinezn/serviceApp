@@ -6,7 +6,7 @@ import Servicio from "./components/Servicios.js";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import Solicitudes from "./components/Solicitudes.js";
 
-const CLIENT_ID = "928735218431-42u8v29ikt7o8sd4ljdr3n429fd43jfe.apps.googleusercontent.com";
+const CLIENT_ID = process.env.CLIENT;
 
 const App = () => {
   const [user, setUser] = useState([]);
@@ -17,10 +17,7 @@ const App = () => {
   const setUpWebSocket = () => {
     const socket = new WebSocket("ws://localhost:3001");
     socket.onopen = () => {
-      console.log("WS socket connected");
-
       socket.onmessage = (msg) => {
-        console.log("Got message", JSON.parse(msg.data));
         setServicios(JSON.parse(msg.data));
       };
     };
@@ -28,29 +25,24 @@ const App = () => {
 
   useEffect(() => {
     setUpWebSocket();
-    console.log("get user");
     fetch("/getUser")
       .then((res) => res.json())
       .then((user) => setEmail(user[0].email));
     fetch("/profile")
       .then((res) => res.json())
       .then((user) => {
-        console.log("ayuda", user[0]);
         if (user[0]) {
           setUser({ username: user[0].username, tipo: user[0].tipo });
           if (user[0].tipo === "Empleado") {
             fetch(`/getServicios/${user[0].username}`)
               .then((res) => res.json())
               .then((quest) => setSolicitudes(quest));
-            console.log("no deberia entrar");
           } else {
             fetch(`/getServiciosC/${user[0].username}`)
               .then((res) => res.json())
               .then((quest) => {
-                console.log("quest!", quest);
                 setSolicitudes(quest);
               });
-            console.log("deberia entrar");
           }
         } else setUser(null);
       });
@@ -69,7 +61,6 @@ const App = () => {
   }
   const GoogleBtn = () => {
     const login = (response) => {
-      console.log("que pasa", JSON.stringify(response.Qt.zu));
       setEmail(JSON.stringify(response.Qt.zu));
       fetch("/login/" + response.Qt.zu);
     };
@@ -77,9 +68,7 @@ const App = () => {
     const logout = (response) => {
       fetch("/logout");
       setEmail("");
-      console.log("logout");
     };
-    console.log("usuario", email);
     return (
       <div>
         {email ? (
@@ -102,7 +91,6 @@ const App = () => {
   };
 
   const Servicios = () => {
-    console.log("ser", servicios);
     return (
       <div>
         <Servicio servicios={servicios} usuario={user}></Servicio>
