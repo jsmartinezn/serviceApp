@@ -57,6 +57,7 @@ const Servicios = (props) => {
           <span></span>
         ) : (
           <div className="solicitar_servicio col-12">
+            <!-- Sería más cómodo para el usuario si este componente se mostrara más cerca del servicio solicitado -->
             <div className="fit fit-3">
               <SolicitarServicio
                 user={servicio}
