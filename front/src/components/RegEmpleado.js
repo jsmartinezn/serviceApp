@@ -4,21 +4,22 @@ const Empleado = (props) => {
   return (
     <form action="/registerEmpleado" method="post">
       <div>
-        <label>Username:</label>
+      //Por usabilidad coloquen los atributos for y name a estas etiquetas
+        <label for="username">Username:</label>
         <input type="text" name="username" required />
         <br />
       </div>
       <div>
-        <label>Email:</label>
+        <label for="email">Email:</label>
         <input type="text" name="email" defaultValue={props.email} disabled />
         <br />
       </div>
       <div>
-        <label>Ocupación:</label>
+        <label for="ocupacion">Ocupación:</label>
         <input type="text" name="ocupacion" required />
       </div>
       <div>
-        <label>Años de experiencia:</label>
+        <label for="experiencia">Años de experiencia:</label>
         <input type="text" name="experiencia" required />
       </div>
       <div>
