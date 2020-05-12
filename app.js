@@ -1,3 +1,5 @@
+
+//Si van a usar dotenv en el readme especifiquen como se tiene que usar
 require("dotenv").config();
 const createError = require("http-errors");
 const express = require("express");
