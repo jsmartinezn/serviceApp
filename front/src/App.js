@@ -216,6 +216,7 @@ const App = () => {
                             <div className="row">
                               <div className="col-6">
                                 <Link className="nav-link" to="/register">
+                                  {/* Tener cuidado con estos pedazos de código muerto. Yo recomendaría, en lo posible, trabajar con archivos .jsx */}
                                   {" "}
                                   Registrarse{" "}
                                 </Link>
