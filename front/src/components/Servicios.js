@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import SolicitarServicio from "./SolicitarServicio.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+//Consideren colocar los tipos de los props, ayuda a evitar errores
+import PropTypes from 'prop-types';
+
 
 const Servicios = (props) => {
   const [servicio, setServicio] = useState([]);
@@ -71,4 +74,8 @@ const Servicios = (props) => {
   return <div className="Questions">{renderServicios()}</div>;
 };
 
+
+Servicios.propTypes = {
+  //Sus prototipos
+};
 export default Servicios;
