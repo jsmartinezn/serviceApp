@@ -15,6 +15,7 @@ const App = () => {
   const [solicitud, setSolicitudes] = useState([]);
 
   const setUpWebSocket = () => {
+    // Esto debería estar en una variable de entorno donde se tenga el back ej: ws://servidor
     const socket = new WebSocket("ws://localhost:3001");
     socket.onopen = () => {
       socket.onmessage = (msg) => {
