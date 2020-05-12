@@ -23,6 +23,11 @@ app.use(express.static(path.join(__dirname, "front/build")));
 app.use("/", indexRouter);
 app.use("/", passportRouter);
 
+// Handle React routing, return all requests to React app
+app.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname, "front/build", "index.html"));
+});
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
