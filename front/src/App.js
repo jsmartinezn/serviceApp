@@ -15,6 +15,7 @@ const App = () => {
   const [solicitud, setSolicitudes] = useState([]);
 
   const setUpWebSocket = () => {
+    // El WebSocket debería llamarse a la dirección en heroku
     const socket = new WebSocket("ws://localhost:3001");
     socket.onopen = () => {
       socket.onmessage = (msg) => {
