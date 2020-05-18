@@ -178,7 +178,9 @@ const App = () => {
                             <div>
                               <a
                                 className="nav-link"
-                                href={"http://localhost:3001/auth/google"}
+                                href={
+                                  "https://service-app-uniandes.herokuapp.com/auth/google"
+                                }
                               >
                                 LOGIN WITH GOOGLE
                               </a>
@@ -208,7 +210,7 @@ const App = () => {
                                 <a
                                   className="nav-link"
                                   href={
-                                    "http://localhost:3001/auth/google/logout"
+                                    "https://service-app-uniandes.herokuapp.com/auth/google/logout"
                                   }
                                 >
                                   Logout
