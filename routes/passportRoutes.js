@@ -2,32 +2,45 @@ const express = require("express");
 const router = express.Router();
 
 const mu = require("../db/MongoUtils.js");
+const passport = require("passport");
 
 router.get("/inicializar", function (req, res) {
   mu.passport.inicializar().then(res.redirect("/"));
 });
 
 router.get("/getUser", function (req, res) {
-  mu.passport.getRecurrent().then((user) => res.json(user));
-});
-
-router.get("/reiniciar", function (req, res) {
-  mu.passport.reiniciar();
-  mu.passport.reiniciarE();
-  mu.passport.reiniciarC().then(res.redirect("/"));
+  res.json(req.user || []);
 });
 
 router.get("/getAll", function (req, res) {
   mu.passport.getAll().then((user) => res.json(user));
 });
 
-router.get("/login/:query", (req, res) => {
-  console.log(req.params.query);
-  mu.passport.recurrent(req.params.query).then(res.redirect("/"));
-});
-
 router.get("/logout", (req, res) => {
   mu.passport.recurrent("").then(res.redirect("/"));
+});
+
+// Initiates basic Sign in with Google flow
+router.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  })
+);
+
+// Completes the OAuth flow
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google"),
+  (req, res) => {
+    res.redirect("http://localhost:3000/");
+  }
+);
+
+// Handle removing the user from the session
+router.get("/auth/google/logout", (req, res) => {
+  req.logout();
+  res.redirect("https://accounts.google.com/logout");
 });
 
 module.exports = router;

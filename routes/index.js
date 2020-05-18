@@ -5,55 +5,26 @@ const ObjectID = require("mongodb").ObjectID;
 
 /* GET home page. */
 
-router.get("/", function (req, res) {
-  mu.passport.getRecurrent().then((user) => {
-    if (user[0] != undefined)
-      res.render("index", { title: user[0].username || "usuario" });
-    res.render("index", { title: "vacio" });
-  });
-});
-
-router.get("/profile", function (req, res) {
-  mu.passport.getRecurrent().then((user) => {
-    mu.passport.find(user[0].email).then((user2) => {
-      res.json(user2);
-    });
-  });
-});
-
 router.post("/registerEmpleado", (req, res) => {
-  mu.passport.getRecurrent().then((users) => {
-    mu.passport
-      .register(req.body.username, users[0].email, "Empleado")
-      .then(
-        mu.passport.registerEmpleado(
+  mu.passport
+    .cambiarTipo(req.user[0].email, "Empleado", req.body.username)
+    .then(
+      mu.passport
+        .registerEmpleado(
           req.body.username,
           req.body.ocupacion,
           req.body.experiencia
         )
-      )
-      .then(res.redirect("/"));
-  });
+        .then(res.redirect("/"))
+    );
 });
 
 router.post("/registerCliente", (req, res) => {
-  mu.passport.getRecurrent().then((users) => {
-    console.log("aaa", users[0].email);
-    mu.passport
-      .register(req.body.username, users[0].email, "Cliente")
-      .then(mu.passport.registerCliente(req.body.username))
-      .then(res.redirect("/"));
-  });
-});
-
-router.post("/registerCliente", (req, res) => {
-  mu.passport.getRecurrent().then((users) => {
-    console.log("aaa", users[0].email);
-    mu.passport
-      .register(req.body.username, users[0].email, "Cliente")
-      .then(mu.passport.registerCliente(req.body.username))
-      .then(res.redirect("/"));
-  });
+  mu.passport
+    .cambiarTipo(req.user[0].email, "Cliente", req.body.username)
+    .then(
+      mu.passport.registerCliente(req.body.username).then(res.redirect("/"))
+    );
 });
 
 router.post("/registroServicio", (req, res) => {

@@ -5,7 +5,7 @@ module.exports = {
         es6: true,
         node: true,
     },
-    extends: ["eslint:recommended", "plugin:react/recommended", "prettier", "plugin:jest/recommended"],
+    extends: ["eslint:recommended", "plugin:react/recommended", "prettier"],
     globals: {
         Atomics: "readonly",
         SharedArrayBuffer: "readonly",
@@ -19,8 +19,9 @@ module.exports = {
     },
     plugins: ["react"],
     rules: {
-    indent: ["error", 4],
-    "linebreak-style": ["error", "unix"],
-    quotes: ["error", "double"],
-    semi: ["error", "always"],},
+        indent: ["error", 2],
+        "linebreak-style": ["error", "unix"],
+        quotes: ["error", "double"],
+        semi: ["error", "always"],
+    },
 };

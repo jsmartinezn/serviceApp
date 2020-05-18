@@ -1,4 +1,3 @@
-require("dotenv").config();
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -7,6 +6,7 @@ const logger = require("morgan");
 
 const indexRouter = require("./routes/index");
 const passportRouter = require("./routes/passportRoutes.js");
+const configureAuthGoogle = require("./config-google.js");
 
 const app = express();
 
@@ -19,6 +19,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "front/build")));
+
+configureAuthGoogle(app);
 
 app.use("/", indexRouter);
 app.use("/", passportRouter);

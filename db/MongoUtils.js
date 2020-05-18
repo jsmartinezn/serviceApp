@@ -23,7 +23,7 @@ function MongoUtils() {
       return collection.drop();
     });
 
-  mu.passport.register = (_name, _email, _tipo) =>
+  mu.passport.create = (_name, _email, _tipo) =>
     mu.connect().then((client) => {
       const nuevo = {
         username: _name,
@@ -91,6 +91,17 @@ function MongoUtils() {
         .sort({ timestamp: -1 })
         .limit(1)
         .toArray()
+        .finally(() => client.close());
+    });
+
+  mu.passport.cambiarTipo = (_email, _tipo, _username) =>
+    mu.connect().then((client) => {
+      const recurrente = client.db(dbName).collection("usuario");
+      return recurrente
+        .updateOne(
+          { email: _email },
+          { $set: { tipo: _tipo, username: _username } }
+        )
         .finally(() => client.close());
     });
 

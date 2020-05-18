@@ -3,10 +3,7 @@ import Footer from "./footer.js";
 import Register from "./components/Register.js";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Servicio from "./components/Servicios.js";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
 import Solicitudes from "./components/Solicitudes.js";
-
-const CLIENT_ID = process.env.CLIENT;
 
 const App = () => {
   const [user, setUser] = useState([]);
@@ -27,24 +24,22 @@ const App = () => {
     setUpWebSocket();
     fetch("/getUser")
       .then((res) => res.json())
-      .then((user) => setEmail(user[0].email));
-    fetch("/profile")
-      .then((res) => res.json())
       .then((user) => {
         if (user[0]) {
-          setUser({ username: user[0].username, tipo: user[0].tipo });
-          if (user[0].tipo === "Empleado") {
-            fetch(`/getServicios/${user[0].username}`)
-              .then((res) => res.json())
-              .then((quest) => setSolicitudes(quest));
-          } else {
-            fetch(`/getServiciosC/${user[0].username}`)
-              .then((res) => res.json())
-              .then((quest) => {
-                setSolicitudes(quest);
-              });
-          }
-        } else setUser(null);
+          setEmail(user[0].email);
+          if (user[0].tipo !== "Pendiente") {
+            setUser({ username: user[0].username, tipo: user[0].tipo });
+            if (user[0].tipo === "Empleado") {
+              fetch(`/getServicios/${user[0].username}`)
+                .then((res) => res.json())
+                .then((quest) => setSolicitudes(quest));
+            } else {
+              fetch(`/getServiciosC/${user[0].username}`)
+                .then((res) => res.json())
+                .then((quest) => setSolicitudes(quest));
+            }
+          } else setUser(null);
+        } else setEmail(null);
       });
 
     fetch("/getAllE")
@@ -59,36 +54,7 @@ const App = () => {
       </div>
     );
   }
-  const GoogleBtn = () => {
-    const login = (response) => {
-      setEmail(JSON.stringify(response.Qt.zu));
-      fetch("/login/" + response.Qt.zu);
-    };
 
-    const logout = (response) => {
-      fetch("/logout");
-      setEmail("");
-    };
-    return (
-      <div>
-        {email ? (
-          <GoogleLogout
-            clientId={CLIENT_ID}
-            buttonText="Logout"
-            onLogoutSuccess={logout}
-          ></GoogleLogout>
-        ) : (
-          <GoogleLogin
-            clientId={CLIENT_ID}
-            buttonText="Login"
-            onSuccess={login}
-            cookiePolicy={"single_host_origin"}
-            responseType="code,token"
-          />
-        )}
-      </div>
-    );
-  };
   function Home() {
     return (
       <div className="">
@@ -209,8 +175,13 @@ const App = () => {
 
                         <li className="nav-item menu-login">
                           {!email ? (
-                            <div className="row">
-                              <GoogleBtn />
+                            <div>
+                              <a
+                                className="nav-link"
+                                href={"http://localhost:3001/auth/google"}
+                              >
+                                LOGIN WITH GOOGLE
+                              </a>
                             </div>
                           ) : !user ? (
                             <div className="row">
@@ -220,13 +191,10 @@ const App = () => {
                                   Registrarse{" "}
                                 </Link>
                               </div>
-                              <div className="col-6">
-                                <GoogleBtn />
-                              </div>
                             </div>
                           ) : (
                             <div className="row">
-                              <div className="col-3">
+                              <div className="col-4">
                                 <Link className="nav-link" to="/">
                                   {user.username}
                                 </Link>
@@ -237,9 +205,14 @@ const App = () => {
                                 </Link>
                               </div>
                               <div className="col-4">
-                                <div className="row">
-                                  <GoogleBtn />
-                                </div>
+                                <a
+                                  className="nav-link"
+                                  href={
+                                    "http://localhost:3001/auth/google/logout"
+                                  }
+                                >
+                                  Logout
+                                </a>
                               </div>
                             </div>
                           )}
@@ -252,9 +225,6 @@ const App = () => {
 
               <div className="contenido">
                 <Switch>
-                  <Route path="/login">
-                    <GoogleBtn />
-                  </Route>
                   <Route path="/register">
                     <Regi />
                   </Route>
