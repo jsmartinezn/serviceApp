@@ -12,7 +12,9 @@ const App = () => {
   const [solicitud, setSolicitudes] = useState([]);
 
   const setUpWebSocket = () => {
-    const socket = new WebSocket("ws://service-app-uniandes.herokuapp.com/");
+    const socket = new WebSocket(
+      `ws://service-app-uniandes.herokuapp.com:${process.env.PORT}`
+    );
     socket.onopen = () => {
       socket.onmessage = (msg) => {
         setServicios(JSON.parse(msg.data));
