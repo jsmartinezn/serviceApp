@@ -23,7 +23,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    setUpWebSocket();
+    //setUpWebSocket(); no funiona en heroku
     fetch("/getUser")
       .then((res) => res.json())
       .then((user) => {
