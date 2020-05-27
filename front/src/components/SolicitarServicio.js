@@ -5,12 +5,17 @@ const SolicitarServicio = (props) => {
     <form action="/registroServicio" method="post">
       <div className="form-group">
         <label>Usuario del empleado:</label>
-        <input  readonly="true" className="form-control" type="text" name="usernameE" defaultValue={props.user}/>
+        <input
+          readOnly={true}
+          className="form-control"
+          type="text"
+          name="usernameE"
+          defaultValue={props.user}
+        />
       </div>
       <div className="form-group">
         <label>Usuario del cliente:</label>
         <input
-          readonly="true"
           className="form-control"
           type="text"
           name="usernameC"
@@ -19,7 +24,7 @@ const SolicitarServicio = (props) => {
       </div>
       <div className="form-group">
         <label>Especificaciones:</label>
-        <input type="text"  className="form-control" name="especificacion"/>
+        <input type="text" className="form-control" name="especificacion" />
       </div>
       <div className="form-group">
         <button type="submit" className="btn btn-primary btn-card">

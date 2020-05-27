@@ -1,14 +1,15 @@
 const MongoClient = require("mongodb").MongoClient;
+const env = require("node-env-file");
+const ObjectID = require("mongodb").ObjectID;
+
+env(".env");
 
 function MongoUtils() {
   const mu = {},
-    hostname = "localhost",
-    port = 27017,
     dbName = "service";
 
   mu.connect = () => {
-    // const urls = process.env.PASS;
-    const urls = process.env.PASS || `mongodb://${hostname}:${port}`;
+    const urls = process.env.PASS;
     const client = new MongoClient(urls, {
       useUnifiedTopology: true,
     });
@@ -127,6 +128,17 @@ function MongoUtils() {
       return emp.insertOne(cliente).finally(() => client.close());
     });
 
+  mu.passport.getAllEO = (_ocupacion) =>
+    mu.connect().then((client) => {
+      const reportesCol = client.db(dbName).collection("empleado");
+      return reportesCol
+        .find({ ocupacion: _ocupacion })
+        .sort({ timestamp: -1 })
+        .limit(20)
+        .toArray()
+        .finally(() => client.close());
+    });
+
   mu.passport.getAllE = () =>
     mu.connect().then((client) => {
       const reportesCol = client.db(dbName).collection("empleado");
@@ -242,15 +254,40 @@ function MongoUtils() {
         .finally(() => client.close());
     });
 
+  mu.servicios.getEmpleadoId = (_id_) =>
+    mu.connect().then((client) => {
+      const reportesCol = client.db(dbName).collection("servicio");
+      return reportesCol
+        .find({ _id: new ObjectID(_id_) })
+        .sort({ timestamp: -1 })
+        .limit(20)
+        .toArray()
+        .finally(() => client.close());
+    });
+
+  mu.passport.getEmpleadoUser = (_username) =>
+    mu.connect().then((client) => {
+      const reportesCol = client.db(dbName).collection("empleado");
+      return reportesCol
+        .find({ username: _username })
+        .sort({ timestamp: -1 })
+        .limit(20)
+        .toArray()
+        .finally(() => client.close());
+    });
+
   mu.passport.listenForChanges = (notifyAll) => {
     console.log("Listening for changes");
     return mu.connect().then((client) => {
-      const cursor = client.db(dbName).collection("empleado").watch();
+      const cursor = client.db(dbName).collection("servicio").watch();
       cursor.on("change", (data) => {
         console.log("Mongon change", data);
-        mu.passport.getAllE().then((docs) => {
-          notifyAll(JSON.stringify(docs));
-        });
+        console.log("Mongon change", data.documentKey._id);
+        mu.servicios.getEmpleadoId(data.documentKey._id).then((key) =>
+          mu.servicios.getEmpleado(key[0].empleado).then((docs) => {
+            notifyAll(JSON.stringify(docs));
+          })
+        );
       });
     });
   };

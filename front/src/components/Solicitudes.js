@@ -11,10 +11,7 @@ const Solicitudes = (props) => {
   const [cal, setCal] = useState(false);
 
   function Aceptar(id) {
-    setAceptar(true);
-    setFin(false);
-    setCal(false);
-    setId(id);
+    fetch(`/aceptarServicio/${id}`);
   }
 
   function Finalizarr(id) {
@@ -36,8 +33,12 @@ const Solicitudes = (props) => {
       <div className="solicitudes row">
         <div className="col-12 informacion">
           <h2>Solicitudes:</h2>
-          <p>A continuación encontrarás la lista de solicictudes que tienes actualmente. Puedes aceptar una solicitud de servicio nueva, finalizar una solicitud
-          que se encuentre en proceso, y calificar aquellas que ya se encuentrar finalizadas. </p>
+          <p>
+            A continuación encontrarás la lista de solicictudes que tienes
+            actualmente. Puedes aceptar una solicitud de servicio nueva,
+            finalizar una solicitud que se encuentre en proceso, y calificar
+            aquellas que ya se encuentrar finalizadas.{" "}
+          </p>
         </div>
         <Router>
           {props.solicitud.map((s, i) => (

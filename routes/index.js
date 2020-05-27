@@ -19,6 +19,10 @@ router.post("/registerEmpleado", (req, res) => {
     );
 });
 
+router.get("/getEmpleado/:query", function (req, res) {
+  mu.passport.getEmpleadoUser(req.params.query).then((user) => res.json(user));
+});
+
 router.post("/registerCliente", (req, res) => {
   mu.passport
     .cambiarTipo(req.user[0].email, "Cliente", req.body.username)
@@ -42,6 +46,10 @@ router.get("/getAllE", function (req, res) {
   mu.passport.getAllE().then((user) => res.json(user));
 });
 
+router.get("/getAllE/:query", function (req, res) {
+  mu.passport.getAllEO(req.params.query).then((user) => res.json(user));
+});
+
 router.get("/getServicios", function (req, res) {
   mu.servicios.getAll().then((user) => res.json(user));
 });
@@ -54,11 +62,9 @@ router.get("/getServiciosC/:query", function (req, res) {
   mu.servicios.getCliente(req.params.query).then((user) => res.json(user));
 });
 
-router.post("/aceptarServicio", (req, res) => {
+router.get("/aceptarServicio/:query", (req, res) => {
   //console.log(req.body.respuesta, req.user.username);
-  mu.servicios
-    .aceptar(new ObjectID(req.body.id), req.body.comentarios)
-    .then(res.redirect("/"));
+  mu.servicios.aceptar(new ObjectID(req.params.query)).then(res.redirect("/"));
 });
 
 router.post("/finalizarServicio", (req, res) => {
