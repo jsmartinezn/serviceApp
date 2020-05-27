@@ -4,9 +4,9 @@ const router = express.Router();
 const mu = require("../db/MongoUtils.js");
 const passport = require("passport");
 
-//const env = require("node-env-file");
+const env = require("node-env-file");
 
-//env(".env");
+env(".env");
 
 router.get("/inicializar", function (req, res) {
   mu.passport.inicializar().then(res.redirect("/"));

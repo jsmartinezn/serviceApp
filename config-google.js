@@ -2,9 +2,9 @@ const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const session = require("express-session");
 const mu = require("./db/MongoUtils.js");
-//const env = require("node-env-file");
+const env = require("node-env-file");
 
-//env(".env");
+env(".env");
 
 const configureAuthGoogle = (app) => {
   // Configure the Google Strategy
