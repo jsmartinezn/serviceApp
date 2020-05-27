@@ -10,7 +10,7 @@ const App = () => {
   const [email, setEmail] = useState("");
   const [solicitud, setSolicitudes] = useState([]);
 
-  const url = "http://localhost:3001";
+  const url = "https://service-app-uniandes.herokuapp.com/";
 
   const setUpWebSocket = () => {
     const socket = new WebSocket("ws://localhost:3001");

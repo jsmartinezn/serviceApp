@@ -1,8 +1,9 @@
 const MongoClient = require("mongodb").MongoClient;
-const env = require("node-env-file");
+
 const ObjectID = require("mongodb").ObjectID;
 
-env(".env");
+//const env = require("node-env-file");
+//env(".env");
 
 function MongoUtils() {
   const mu = {},
