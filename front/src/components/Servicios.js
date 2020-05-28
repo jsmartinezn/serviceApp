@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import EmpleadoProfile from "./EmpleadoProfile.js";
@@ -7,44 +7,97 @@ const Servicios = (props) => {
   const [servicios, setServicios] = useState([]);
   const [perfil, setPerfil] = useState(true);
   const [user, setUser] = useState(null);
+  const [pagina, setPagina] = useState(1);
+  const [ocupacion, setOcupacion] = useState("all");
+  const formRef = useRef();
 
   function Solicitar(user) {
     setPerfil(false);
     setUser(user);
   }
 
-  function Librarian() {
-    fetch("/getAllE/Librarian")
-      .then((res) => res.json())
-      .then((quest) => setServicios(quest));
-  }
-
-  function Recruiter() {
-    fetch("/getAllE/Recruiter")
-      .then((res) => res.json())
-      .then((quest) => setServicios(quest));
-  }
-
   useEffect(() => {
-    fetch("/getAllE")
+    fetch(`/getAllE/${pagina}/${ocupacion}`)
       .then((res) => res.json())
       .then((quest) => setServicios(quest));
-  }, []);
+  }, [ocupacion, pagina]);
+
+  const anterior = (evt) => {
+    evt && evt.preventDefault();
+    setPagina(pagina - 1);
+  };
+
+  const siguiente = (evt) => {
+    evt && evt.preventDefault();
+    setPagina(pagina + 1);
+  };
+
+  const filtrarOcupacion = (evt) => {
+    evt && evt.preventDefault();
+    const formData = new FormData(formRef.current);
+    const filtro = formData.get("filtro");
+    setOcupacion(filtro);
+    setPagina(1);
+  };
+
+  const verTodo = (evt) => {
+    evt && evt.preventDefault();
+    setOcupacion("all");
+    setPagina("1");
+  };
 
   const renderServicios = () => {
     return (
       <div className="row">
         <Router>
-          <div className="col-2">
-            <h3>Ocupación</h3>
-            <Nav defaultActiveKey="/home" className="flex-column">
-              <Link className="nav-link" to="/" onClick={Recruiter}>
-                Recruiter
-              </Link>
-              <Link className="nav-link" to="/" onClick={Librarian}>
-                Librarian
-              </Link>
-            </Nav>
+          <div className="col-3">
+            <h3>Filtrar por Ocupación</h3>
+            <p>
+              Puedes filtrar los resultados escribiendo la una palabra clave de
+              la ocupación que te interese. Con el botón FILTRAR obtendrás los
+              resultados que se adapten a tu condición.{" "}
+            </p>
+            <div className="row">
+              <div className="col-12">
+                <form id="formSearch" ref={formRef}>
+                  <div className="form-group cien">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Filtrar por Ocupación"
+                      name="filtro"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <button
+                      className="btn btn-primary"
+                      type="button"
+                      onClick={filtrarOcupacion}
+                    >
+                      Filtrar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <p>
+                  {" "}
+                  Si deseas ver de nuevo todas las ocupaciones presiona el
+                  siguiente botón{" "}
+                </p>
+                <div className="form-group">
+                  <button
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={verTodo}
+                  >
+                    Ver todo
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="col-8">
             {!perfil ? (
@@ -92,6 +145,30 @@ const Servicios = (props) => {
                     </Switch>
                   </div>
                 </Router>
+                <div className="paginacion col-12">
+                  <div className="col-12">
+                    <span>Mostrando resultados de la página: {pagina}</span>
+                  </div>
+
+                  <div className="pag col-12">
+                    {pagina > 1 ? (
+                      <button className="btn btn-primary" onClick={anterior}>
+                        Anterior
+                      </button>
+                    ) : (
+                      <button
+                        disabled
+                        className="btn btn-secondary"
+                        onClick={anterior}
+                      >
+                        Anterior
+                      </button>
+                    )}
+                    <button className="btn btn-primary" onClick={siguiente}>
+                      Siguiente
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
           </div>

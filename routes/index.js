@@ -42,12 +42,20 @@ router.post("/registroServicio", (req, res) => {
     .then(res.redirect("/"));
 });
 
-router.get("/getAllE", function (req, res) {
-  mu.passport.getAllE().then((user) => res.json(user));
+router.get("/getAllE/:page", function (req, res) {
+  mu.passport.getAllE(req.params.page).then((user) => res.json(user));
 });
 
-router.get("/getAllE/:query", function (req, res) {
-  mu.passport.getAllEO(req.params.query).then((user) => res.json(user));
+router.get("/getAllE/:page/:query", function (req, res) {
+  let query = {};
+  if (req.params.query != "all") {
+    console.log("true");
+    query = {
+      ocupacion: new RegExp(`.*${req.params.query}.*`, "i")
+    };
+  }
+  console.log(query);
+  mu.passport.getAllEO(req.params.page, query).then((user) => res.json(user));
 });
 
 router.get("/getServicios", function (req, res) {

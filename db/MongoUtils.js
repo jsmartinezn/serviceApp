@@ -12,7 +12,7 @@ function MongoUtils() {
   mu.connect = () => {
     const urls = process.env.PASS;
     const client = new MongoClient(urls, {
-      useUnifiedTopology: true,
+      useUnifiedTopology: true
     });
     return client.connect();
   };
@@ -30,7 +30,7 @@ function MongoUtils() {
       const nuevo = {
         username: _name,
         email: _email,
-        tipo: _tipo,
+        tipo: _tipo
       };
       const usuarioNuevo = client.db(dbName).collection("usuario");
       return usuarioNuevo.insertOne(nuevo).finally(() => client.close());
@@ -64,7 +64,7 @@ function MongoUtils() {
       const nuevo = {
         username: "recurrent",
         email: "",
-        tipo: "recurrent",
+        tipo: "recurrent"
       };
       return recurrente.insertOne(nuevo).finally(() => client.close());
     });
@@ -113,7 +113,7 @@ function MongoUtils() {
       const empleado = {
         username: _username,
         ocupacion: _ocupacion,
-        anios: _anios,
+        anios: _anios
       };
       console.log("empleado", empleado);
       return emp.insertOne(empleado).finally(() => client.close());
@@ -123,30 +123,32 @@ function MongoUtils() {
     mu.connect().then((client) => {
       const emp = client.db(dbName).collection("cliente");
       const cliente = {
-        username: _username,
+        username: _username
       };
       console.log("empleado", cliente);
       return emp.insertOne(cliente).finally(() => client.close());
     });
 
-  mu.passport.getAllEO = (_ocupacion) =>
+  mu.passport.getAllEO = (pageNumber, query) =>
     mu.connect().then((client) => {
       const reportesCol = client.db(dbName).collection("empleado");
       return reportesCol
-        .find({ ocupacion: _ocupacion })
+        .find(query)
         .sort({ timestamp: -1 })
-        .limit(20)
+        .skip(pageNumber > 0 ? (pageNumber - 1) * 21 : 0)
+        .limit(21)
         .toArray()
         .finally(() => client.close());
     });
 
-  mu.passport.getAllE = () =>
+  mu.passport.getAllE = (pageNumber) =>
     mu.connect().then((client) => {
       const reportesCol = client.db(dbName).collection("empleado");
       return reportesCol
         .find()
         .sort({ timestamp: -1 })
-        .limit(20)
+        .skip(pageNumber > 0 ? (pageNumber - 1) * 21 : 0)
+        .limit(21)
         .toArray()
         .finally(() => client.close());
     });
@@ -184,7 +186,7 @@ function MongoUtils() {
         empleado: _usernameE,
         descripcion: _descripcion,
         estado: _estado,
-        comentario: "",
+        comentario: ""
       };
       return emp.insertOne(cliente).finally(() => client.close());
     });

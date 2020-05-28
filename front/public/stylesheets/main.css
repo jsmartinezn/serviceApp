@@ -10,12 +10,28 @@ h5,
 h6,
 a {
   color: #391361;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
 }
 
-p, span, label {
+p,
+span,
+label {
+  font-family: "Nunito Sans", sans-serif;
+}
+footer {
+  margin-top: 5em;
+}
 
-  font-family: 'Nunito Sans', sans-serif;
+.paginacion {
+  margin-bottom: 2em;
+  text-align: center;
+}
+.pag > button {
+  margin-right: 0.5em;
+}
+
+.cien {
+  width: 100% !important;
 }
 
 #navbar {
@@ -195,7 +211,7 @@ textarea {
   background-color: #18612f;
   border-color: #18612f;
 }
-.btn-card{
+.btn-card {
   width: 100%;
   border-top-left-radius: 0 !important;
   border-top-right-radius: 0 !important;
@@ -214,31 +230,32 @@ textarea {
   border-radius: 10px;
 }
 
-.btn-gold{
+.btn-gold {
   background-color: #ad8345;
   border-color: #ad8345;
-  color:#ffffff;
+  color: #ffffff;
 }
 .gold {
   color: #ad8345;
 }
 
-.servicio, .solicitud{
+.servicio,
+.solicitud {
   margin-bottom: 2.5em;
   text-align: center;
   min-height: 12em;
 }
 
-.informacion{
+.informacion {
   margin-bottom: 2.5em;
   text-align: justify;
 }
 
-.solicitar_servicio{
-  max-width: 50%
+.solicitar_servicio {
+  max-width: 50%;
 }
 
-.fit{
+.fit {
   position: relative;
   min-height: 10em;
   padding: 1em;
@@ -246,11 +263,11 @@ textarea {
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.fit-2{
+.fit-2 {
   min-height: 15em;
 }
 
-.fit-3{
+.fit-3 {
   min-height: 20em;
 }
 
