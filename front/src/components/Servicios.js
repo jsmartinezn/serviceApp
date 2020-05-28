@@ -50,7 +50,7 @@ const Servicios = (props) => {
     return (
       <div className="row">
         <Router>
-          <div className="col-3">
+          <div className="informacion col-3">
             <h3>Filtrar por Ocupación</h3>
             <p>
               Puedes filtrar los resultados escribiendo la una palabra clave de
@@ -81,7 +81,7 @@ const Servicios = (props) => {
               </div>
             </div>
             <div className="row">
-              <div className="col-12">
+              <div className=" informacion col-12">
                 <p>
                   {" "}
                   Si deseas ver de nuevo todas las ocupaciones presiona el
@@ -136,6 +136,15 @@ const Servicios = (props) => {
                       </div>
                     </div>
                   ))}
+                  {servicios.length > 0 ? (
+                    <div></div>
+                  ) : (
+                    <div className="center col12">
+                      <div class="alert alert-danger" role="alert">
+                        No se encontraron perfiles con la ocupación seleccionada
+                      </div>
+                    </div>
+                  )}
 
                   <div className="contenido">
                     <Switch>
@@ -164,9 +173,19 @@ const Servicios = (props) => {
                         Anterior
                       </button>
                     )}
-                    <button className="btn btn-primary" onClick={siguiente}>
-                      Siguiente
-                    </button>
+                    {servicios.length == 21 ? (
+                      <button className="btn btn-primary" onClick={siguiente}>
+                        Siguiente
+                      </button>
+                    ) : (
+                      <button
+                        disabled
+                        className="btn btn-secondary"
+                        onClick={siguiente}
+                      >
+                        Siguiente
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
