@@ -13,6 +13,7 @@ const App = () => {
   const url = "https://service-app-uniandes.herokuapp.com";
 
   const setUpWebSocket = () => {
+    // El WebSocket debería llamarse a la dirección en heroku
     const socket = new WebSocket("ws://localhost:3001");
     socket.onopen = () => {
       socket.onmessage = (msg) => {
