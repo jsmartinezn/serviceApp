@@ -20,5 +20,5 @@ const Finalizar = (props) => {
     </form>
   );
 };
-
+//incluir proptypes
 export default Finalizar;
