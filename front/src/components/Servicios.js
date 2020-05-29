@@ -100,7 +100,9 @@ const Servicios = (props) => {
             {user ? (
               <div className="row">
                 <div className="itemModal col-12">
-                  <div className="col-12">Foto</div>
+                  <div className="col-12 Icon">
+                    <i className="fa fa-user"></i>
+                  </div>
                 </div>
                 <div className="itemModal col-12">
                   <div className="col-6">Nombre de usuario:</div>
@@ -119,10 +121,8 @@ const Servicios = (props) => {
                   <div className="col-6 izq"> {user.telefono}</div>
                 </div>
                 <div className="itemModal col-12">
-                  <div className="col-12">Descripción del trabajo que hace</div>
-                </div>
-                <div className="itemModal col-12">
-                  <div className="col-12">Recluta nuevos jugadores</div>
+                  <div className="col-6">Descripción:</div>
+                  <div className="col-6 izq">{user.descripcion}</div>
                 </div>
                 <div className="itemModal col-12">
                   <div className="col-12">
