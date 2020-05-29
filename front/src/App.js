@@ -5,6 +5,15 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Servicio from "./components/Servicios.js";
 import Solicitudes from "./components/Solicitudes.js";
 
+
+/*
+Aunque React pide un objeto padre, no necesariamente debe ser un div. Pueden recurrir a Fragment:
+import {Fragment} from "react";
+O poner objetos vacíos, de la siguiente manera:
+<>
+<Servicio/>
+</>
+*/
 const App = () => {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
@@ -105,17 +114,17 @@ const App = () => {
   }
   const Servicios = () => {
     return (
-      <div>
-        <Servicio usuario={user}></Servicio>
-      </div>
+      <>
+        <Servicio usuario={user}/>
+      </>
     );
   };
 
   const Solicitud = () => {
     return (
-      <div>
-        <Solicitudes solicitud={solicitud} usuario={user}></Solicitudes>
-      </div>
+      <>
+        <Solicitudes solicitud={solicitud} usuario={user}/>
+      </>
     );
   };
 
@@ -127,9 +136,9 @@ const App = () => {
             id="navbar"
             className="navbar navbar-expand-lg navbar-dark bg-dark"
           >
-            <a className="navbar-brand" href="/">
+            <Link className="navbar-brand" to="/">
               Service-App
-            </a>
+            </Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -170,11 +179,11 @@ const App = () => {
 
                     <li className="nav-item menu-login">
                       {!email ? (
-                        <div>
-                          <a className="nav-link" href={`${url}/auth/google`}>
+                        <>
+                          <Link className="nav-link" to={`${url}/auth/google`}>
                             LOGIN WITH GOOGLE
-                          </a>
-                        </div>
+                          </Link>
+                        </>
                       ) : !user ? (
                         <div className="row">
                           <div className="col-6">
@@ -197,12 +206,12 @@ const App = () => {
                             </Link>
                           </div>
                           <div className="col-4">
-                            <a
+                            <Link
                               className="nav-link"
-                              href={`${url}/auth/google/logout`}
+                              to={`${url}/auth/google/logout`}
                             >
                               Logout
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       )}
