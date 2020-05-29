@@ -37,6 +37,16 @@ footer {
 .center {
   margin: 0 auto;
 }
+.itemModal {
+  max-width: 80%;
+  margin: 0 auto;
+  border-bottom: 0.5px dotted #391361;
+  margin-bottom: 1em;
+  display: inherit;
+}
+.izq {
+  text-align: right;
+}
 
 #navbar {
   background-color: #391361 !important;
@@ -182,7 +192,7 @@ textarea {
 .input-group-prepend,
 .input-group-text,
 .form-group {
-  width: 60%;
+  width: 100%;
 }
 
 .labelAnswer {

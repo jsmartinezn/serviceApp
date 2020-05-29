@@ -13,7 +13,7 @@ const EmpleadoP = (props) => {
   return (
     <div>
       <div>Foto</div>
-      <div>Username: {props.user}</div>
+      <div>Nombre de usuario: {props.user}</div>
       <div>Ocupacion: {user.ocupacion}</div>
       <div>Años de experiencia: {user.anios}</div>
       <div>Telefono: {user.telefono}</div>

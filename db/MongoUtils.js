@@ -113,7 +113,8 @@ function MongoUtils() {
       const empleado = {
         username: _username,
         ocupacion: _ocupacion,
-        anios: _anios
+        anios: _anios,
+        timestamp: new Date()
       };
       console.log("empleado", empleado);
       return emp.insertOne(empleado).finally(() => client.close());
@@ -123,7 +124,8 @@ function MongoUtils() {
     mu.connect().then((client) => {
       const emp = client.db(dbName).collection("cliente");
       const cliente = {
-        username: _username
+        username: _username,
+        timestamp: new Date()
       };
       console.log("empleado", cliente);
       return emp.insertOne(cliente).finally(() => client.close());
@@ -186,7 +188,8 @@ function MongoUtils() {
         empleado: _usernameE,
         descripcion: _descripcion,
         estado: _estado,
-        comentario: ""
+        comentario: "",
+        timestamp: new Date()
       };
       return emp.insertOne(cliente).finally(() => client.close());
     });
