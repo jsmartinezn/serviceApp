@@ -48,6 +48,12 @@ footer {
   text-align: right;
 }
 
+.fixed {
+  position: fixed;
+  right: 5%;
+  top: 22%;
+}
+
 #navbar {
   background-color: #391361 !important;
   position: fixed;

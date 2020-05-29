@@ -283,7 +283,7 @@ const Servicios = (props) => {
             </div>
           </div>
           <div className="col-1"></div>
-          <div className="informacion col-3">
+          <div className="informacion fixed col-3">
             <h3>Filtrar por Ocupación</h3>
             <p>
               Puedes filtrar los resultados escribiendo la una palabra clave de
