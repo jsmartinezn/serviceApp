@@ -57,7 +57,7 @@ yarn start
 ---
 
 # Autores
-
+### Seria bueno incluir el link de github de cada uno de los autores
 Sebastian Martinez
 Luis Ruiz
 
