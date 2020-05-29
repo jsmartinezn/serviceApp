@@ -2,6 +2,18 @@ const MongoClient = require("mongodb").MongoClient;
 
 const ObjectID = require("mongodb").ObjectID;
 
+/*
+Recomiendo utilizar dotenv, pues es más práctico (sólo toca ponerlo en el app.js)
+const dotenv = require("dotenv");
+dotenv.config();
+
+Y acceden de la misma manera: process.env.<key>
+
+Recomiendo parametrizar la base de datos (su nombre y el de las colecciones) con config:
+const config = require("config");
+const dbName = config.get("dbName");
+
+*/
 const env = require("node-env-file");
 env(".env");
 
