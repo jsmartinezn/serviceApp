@@ -126,7 +126,7 @@ const Servicios = (props) => {
                 </div>
                 <div className="itemModal col-12">
                   <div className="col-12">
-                    <h4>Solicita el servicio aquí:</h4>
+                    <h5>Solicita el servicio aquí:</h5>
                     <form
                       ref={formRef2}
                       onSumbit={createService}
@@ -183,55 +183,6 @@ const Servicios = (props) => {
           </Modal.Footer>
         </Modal>
         <Router>
-          <div className="informacion col-3">
-            <h3>Filtrar por Ocupación</h3>
-            <p>
-              Puedes filtrar los resultados escribiendo la una palabra clave de
-              la ocupación que te interese. Con el botón FILTRAR obtendrás los
-              resultados que se adapten a tu condición.{" "}
-            </p>
-            <div className="row">
-              <div className="col-12">
-                <form id="formSearch" ref={formRef}>
-                  <div className="form-group cien">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Filtrar por Ocupación"
-                      name="filtro"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <button
-                      className="btn btn-primary"
-                      type="button"
-                      onClick={filtrarOcupacion}
-                    >
-                      Filtrar
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div className="row">
-              <div className=" informacion col-12">
-                <p>
-                  {" "}
-                  Si deseas ver de nuevo todas las ocupaciones presiona el
-                  siguiente botón{" "}
-                </p>
-                <div className="form-group">
-                  <button
-                    className="btn btn-primary"
-                    type="button"
-                    onClick={verTodo}
-                  >
-                    Ver todo
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
           <div className="col-8">
             <div className="servicios row">
               <div className="informacion col-12">
@@ -327,6 +278,56 @@ const Servicios = (props) => {
                       Siguiente
                     </button>
                   )}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-1"></div>
+          <div className="informacion col-3">
+            <h3>Filtrar por Ocupación</h3>
+            <p>
+              Puedes filtrar los resultados escribiendo la una palabra clave de
+              la ocupación que te interese. Con el botón FILTRAR obtendrás los
+              resultados que se adapten a tu condición.{" "}
+            </p>
+            <div className="row">
+              <div className="col-12">
+                <form id="formSearch" ref={formRef}>
+                  <div className="form-group cien">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Filtrar por Ocupación"
+                      name="filtro"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <button
+                      className="btn btn-primary"
+                      type="button"
+                      onClick={filtrarOcupacion}
+                    >
+                      Filtrar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div className="row">
+              <div className=" informacion col-12">
+                <p>
+                  {" "}
+                  Si deseas ver de nuevo todas las ocupaciones presiona el
+                  siguiente botón{" "}
+                </p>
+                <div className="form-group">
+                  <button
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={verTodo}
+                  >
+                    Ver todo
+                  </button>
                 </div>
               </div>
             </div>
