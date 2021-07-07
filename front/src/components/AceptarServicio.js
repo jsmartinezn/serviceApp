@@ -20,5 +20,5 @@ const AceptarServicio = (props) => {
     </form>
   );
 };
-
+//Manejar proptypes permitiria tener un mejor control sobre la informacion
 export default AceptarServicio;
